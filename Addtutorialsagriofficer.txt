@@ -1,0 +1,295 @@
+
+<?php
+
+include 'menu.php';
+ob_start();
+?>
+<!-- /Fixed navbar -->
+<!-- banner section -->	
+<div class="pogoSlider" id="js-main-slider">
+	<div class="pogoSlider-slide" data-transition="barRevealDown" data-duration="1000"  style="background-image:url(images/banner1-1.jpg);">
+		<div class="pogoSlider-slide-element">
+			<h3>FUTURE OF INDIAN AGRICULTURE</h3>
+		</div>
+	</div>
+	<div class="pogoSlider-slide" data-transition="blocksReveal" data-duration="1000" style="background-image:url(images/banner2-2.jpg);">
+		<div class="pogoSlider-slide-element">
+			<h3>FUTURE OF INDIAN AGRICULTURE</h3>
+		</div>
+	</div>
+	<div class="pogoSlider-slide" data-transition="barRevealDown" data-duration="1000" style="background-image:url(images/banner3-3.jpg);">
+		<div class="pogoSlider-slide-element">
+			<h3>FUTURE OF INDIAN AGRICULTURE</h3>
+		</div>
+	</div>
+	<div class="pogoSlider-slide" data-transition="blocksReveal" data-duration="1000"  style="background-image:url(images/banner4-4.jpg);">
+		<div class="pogoSlider-slide-element">
+			<h3>FUTURE OF INDIAN AGRICULTURE</h3>
+		</div>
+	</div>
+</div>
+<!-- /banner section -->
+<section class="typography-w3ls">
+	<h3 class="text-center">Add Tutorial</h3>
+	
+<div class="typography">
+			<!-- container-wrap -->
+			<div class="container">
+				<div class="grid_3 grid_4">
+					
+					<div class="col-lg-2"></div>
+<div class="col-lg-8">
+						
+                                            <?php
+                    
+                            
+                            if(isset($_POST['b1']))
+                                
+{
+$b=mysql_query("select max(id) from farm_info");
+$id=mysql_result($b,0);
+$id++;
+$p=$_FILES['p1']['name'];
+$ext=strchr($p,'.');
+$pname="$id$ext";
+if(move_uploaded_file($_FILES['p1']['tmp_name'],getcwd()."\\img1\\$pname"))
+        
+        
+{
+$d=mysql_query("select max(id) from farm_info");
+$id=mysql_result($d,0);
+$id++;
+$v=$_FILES['v1']['name'];
+$ext=strchr($v,'.');
+$vname="$id$ext";
+if(move_uploaded_file($_FILES['v1']['tmp_name'],getcwd()."\\vido\\$vname"))
+{
+$msg=$_POST['t2'];
+$msg1=  addslashes($msg);
+$msg2=  nl2br($msg1);
+
+
+$nsg=$_POST['t3'];
+$nsg1=  addslashes($nsg);
+$nsg2=  nl2br($nsg1);
+                          
+     mysql_query("insert into farm_info(name,info,rules,fertilizer,climate,phone,email,photo,video)values('$_POST[t1]','$msg2','$nsg2','$_POST[t4]','$_POST[t5]','$_POST[t6]','$_POST[t7]','$pname','$vname')");
+    
+    if(mysql_affected_rows()>0)
+{
+echo"Complete";
+}
+else 
+{
+echo mysql_error();
+}
+}
+ 
+                            } 
+                            }
+
+                            
+    ?>                                  
+
+                         
+
+                            
+                    
+                   <table  class="table  table-responsive  table-striped table-bordered ">
+                        <tr>
+                            <td>Name</td>
+                            <td><input type="text"name="t1"class="form-control"required="required"></td>
+                        </tr>
+                        
+                        
+                         
+                        <tr>
+                            <td>info</td>
+                            <td><textarea  cols="10" rows="10" name="t2"class="form-control"cols="5"rows="5"required="required"></textarea></td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Rules</td>
+                            <td><textarea cols="10" rows="10" name="t3"class="form-control"cols="5"rows="5"required="required"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>Fertilizer</td>
+                            <td><input type="text"name="t4"class="form-control"required="required"></td>
+                        </tr>
+                        <tr>
+                            <td>Climate</td>
+                            <td><input type="text"name="t5"class="form-control"required="required"></td>
+                        </tr>
+                        <tr>
+                            <td>Help line</td>
+                            <td><input type="text"name="t6"class="form-control"required="required"></td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td><input type="email"name="t7"class="form-control"required="required"></td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Photo</td>
+                            <td><input type="file"name="p1"required="required"></td>
+                        </tr>
+                        <tr>
+                            <td>Video</td>
+                            <td><input type="file"name="v1"required="required"></td>
+                        </tr>
+                        
+                        
+                         <tr>
+                            
+                             <td colspan="2"align="center"><input type="submit"value="Register Company"name="b1"class="btn btn-success"></td>
+                        </tr>
+                    </table>
+					</div>
+				</div>
+                            
+                            
+                            
+				
+				   <div class="clearfix"> </div>
+				</div>	 
+				
+			
+				</div>
+			</div>
+			<!-- //container-wrap -->
+		</div>
+	<!-- //typography -->
+</section>	
+<!-- Footer -->
+<?php
+include '../footer.php';
+?>
+<!-- js files -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/classie.js"></script>
+<script src="js/TweenMax.min.js"></script>
+<script src="js/index2.js"></script>
+<script src="js/jquery.pogo-slider.min.js"></script>
+<script src="js/main2.js"></script>
+<script>
+$(document).ready(function(){
+  // Add smooth scrolling to all links in navbar + footer link
+  $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
+
+  // Store hash
+  var hash = this.hash;
+
+  // Using jQuery's animate() method to add smooth page scroll
+  // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+  $('html, body').animate({
+    scrollTop: $(hash).offset().top
+  }, 900, function(){
+
+    // Add hash (#) to URL when done scrolling (default click behavior)
+    window.location.hash = hash;
+    });
+  });
+})
+</script>
+<script>
+$(window).scroll(function() {
+  $(".slideanim").each(function(){
+    var pos = $(this).offset().top;
+
+    var winTop = $(window).scrollTop();
+    if (pos < winTop + 600) {
+      $(this).addClass("slide");
+    }
+  });
+});
+</script>
+<script src="js/retina-1.1.0.js"></script>
+<script src="js/jquery.hoverdir.js"></script>
+<script src="js/jquery.hoverex.min.js"></script>
+<script src="js/jquery.isotope.min.js"></script>
+<script>
+// Portfolio
+(function($) {
+	"use strict";
+	var $container = $('.portfolio'),
+		$items = $container.find('.portfolio-item'),
+		portfolioLayout = 'fitRows';
+		
+		if( $container.hasClass('portfolio-centered') ) {
+			portfolioLayout = 'masonry';
+		}
+				
+		$container.isotope({
+			filter: '*',
+			animationEngine: 'best-available',
+			layoutMode: portfolioLayout,
+			animationOptions: {
+			duration: 750,
+			easing: 'linear',
+			queue: false
+		},
+		masonry: {
+		}
+		}, refreshWaypoints());
+		
+		function refreshWaypoints() {
+			setTimeout(function() {
+			}, 1000);   
+		}
+				
+		$('nav.portfolio-filter ul a').on('click', function() {
+				var selector = $(this).attr('data-filter');
+				$container.isotope({ filter: selector }, refreshWaypoints());
+				$('nav.portfolio-filter ul a').removeClass('active');
+				$(this).addClass('active');
+				return false;
+		});
+		
+		function getColumnNumber() { 
+			var winWidth = $(window).width(), 
+			columnNumber = 1;
+		
+			if (winWidth > 1200) {
+				columnNumber = 5;
+			} else if (winWidth > 950) {
+				columnNumber = 4;
+			} else if (winWidth > 600) {
+				columnNumber = 3;
+			} else if (winWidth > 400) {
+				columnNumber = 2;
+			} else if (winWidth > 250) {
+				columnNumber = 1;
+			}
+				return columnNumber;
+			}       
+			
+			function setColumns() {
+				var winWidth = $(window).width(), 
+				columnNumber = getColumnNumber(), 
+				itemWidth = Math.floor(winWidth / columnNumber);
+				
+				$container.find('.portfolio-item').each(function() { 
+					$(this).css( { 
+					width : itemWidth + 'px' 
+				});
+			});
+		}
+		
+		function setPortfolio() { 
+			setColumns();
+			$container.isotope('reLayout');
+		}
+			
+		$container.imagesLoaded(function () { 
+			setPortfolio();
+		});
+		
+		$(window).on('resize', function () { 
+		setPortfolio();          
+	});
+})(jQuery);
+</script>
+</form>
+</body>
+</html>
